@@ -6,6 +6,7 @@ while True:
 	# BOOLEANOS QUE INDICAN NUMERO DE JUGADORES, Y NUMERO DE HUMANOS
 	juegan_tres=False
 	juegan_cuatro=False
+	un_humano=False
 	dos_humanos=False
 	tres_humanos=False
 	cuatro_humanos=False
@@ -26,17 +27,20 @@ while True:
 		l(1);esp(4);numero_de_personas=int(input("De los "+str(numero_de_jugadores)+" jugadores, ¿Cuántos son humanos?: "))
 	except:
 		clear();continue;
-	if numero_de_personas<1 or numero_de_personas>numero_de_jugadores:
+	if numero_de_personas<0 or numero_de_personas>numero_de_jugadores:
 		l(1);esp(4);print("Número de jugadores humanos incorrecto")
 		standby();clear();
 		continue;
-	if numero_de_personas>=2:
-		dos_humanos=True
-		if numero_de_personas>=3:
-			tres_humanos=True
-			if numero_de_personas==4:
-				cuatro_humanos=True
-	l(1);esp(10);nombre_jugador_1=input("Nombre del jugador 1: ")
+	if numero_de_personas>=1:
+		un_humano=True
+		if numero_de_personas>=2:
+			dos_humanos=True
+			if numero_de_personas>=3:
+				tres_humanos=True
+				if numero_de_personas==4:
+					cuatro_humanos=True
+	if un_humano:
+		l(1);esp(10);nombre_jugador_1=input("Nombre del jugador 1: ")
 	if dos_humanos:
 		l(1);esp(10);nombre_jugador_2=input("Nombre del jugador 2: ")
 	if tres_humanos:
@@ -55,13 +59,22 @@ while True:
 	l(3);esp(4);print("CONFIGURACIÓN INICIAL DE LA PARTIDA")
 	l(2);esp(4);print("Hay "+str(numero_de_jugadores)+" jugadores")
 	esp(4);print(str(numero_de_personas)+" humanos y "+str(numero_de_jugadores-numero_de_personas)+" computadoras")
-	esp(4);print("Jugador 1: "+Fore.RED+nombre_jugador_1)
+	if un_humano:
+		esp(4);print("Jugador 1: "+Fore.RED+nombre_jugador_1)
+	else:
+		esp(4);print("Jugador 1: CPU")
 	if dos_humanos:
 		esp(4);print("Jugador 2: "+Fore.BLUE+nombre_jugador_2)
+	else:
+		esp(4);print("Jugador 2: CPU")
 	if tres_humanos:
 		esp(4);print("Jugador 3: "+Fore.YELLOW+nombre_jugador_3)
+	else:
+		esp(4);print("Jugador 3: CPU")
 	if cuatro_humanos:
 		esp(4);print("Jugador 4: "+Fore.GREEN+nombre_jugador_4)
+	else:
+		esp(4);print("Jugador 4: CPU")
 	esp(4);print("Cada jugador tendrá "+str(numero_de_cartas_iniciales)+" cartas")
 	l(1);esp(4);r=input("¿Está bien esta configuración? si/no: ")
 	if r=="si":
@@ -111,7 +124,8 @@ if juegan_cuatro:
 	lista_de_jugadores.append(baraja4)
 
 # *** LAS SIGUIENTES INSTRUCCIONES TIENEN POR OBJETIVO AGREGAR LOS NOMBRES DE LOS JUGADORES A UNA LISTA PARA PODER SER UTILZADOS DURANTE EL PROGRAMA
-lista_de_nombres.append(nombre_jugador_1)
+if un_humano:
+	lista_de_nombres.append(nombre_jugador_1)
 if dos_humanos:
 	lista_de_nombres.append(nombre_jugador_2)
 if tres_humanos:	
@@ -135,7 +149,10 @@ cascada_toma_dos=0
 cascada_toma_cuatro=0
 obligar_toma_dos=False
 obligar_toma_cuatro=False
-jugador_actual_es_humano=True
+if un_humano:
+	jugador_actual_es_humano=True
+else:
+	jugador_actual_es_humano=False	
 lista_de_cartas_validas=[]
 
 
@@ -147,17 +164,23 @@ while True:
 		# ********************************************************************************************************
 		# INICIO DE LA CONSTRUCCIÓN DEL TABLERO: Mostrar cada jugador, cuantas cartas tiene, el turno actual y la ultima carta de la pila de descartes
 		clear()
-		if jugador_actual_es_humano:
-			print("humano")
-		else:
-			print("computadora")
+		print("Cantidad de cartas en el mazo: ",end="");print(len(mazo))
+		print("Cantidad de cartas en la pila descarte: ",end="");print(len(pila_descarte))
+		print("Cantidad de cartas en Baraja 1: ",end="");print(len(baraja1))
+		print("Cantidad de cartas en Baraja 2: ",end="");print(len(baraja2))
+		if juegan_tres: print("Cantidad de cartas en Baraja 3: ",end="");print(len(baraja3))
+		if juegan_cuatro: print("Cantidad de cartas en Baraja 4: ",end="");print(len(baraja4))
 		l(2)
 		esp(6);print("Estado de la partida: ")
 		if jugador_actual==0:
 			palabra_turno="TURNO ACTUAL: "
 		else:
 			palabra_turno="              "
-		esp(6);print(palabra_turno, end="");print(Fore.RED+lista_de_nombres[0], end="");print(" tiene "+str(len(lista_de_jugadores[0]))+" cartas")
+		
+		if un_humano:
+			esp(6);print(palabra_turno, end="");print(Fore.RED+lista_de_nombres[0], end="");print(" tiene "+str(len(lista_de_jugadores[0]))+" cartas")
+		else:
+			esp(6);print(palabra_turno, end="");print("El jugador 1 tiene "+str(len(lista_de_jugadores[0]))+" cartas")
 		if jugador_actual==1:
 			palabra_turno="TURNO ACTUAL: "
 		else:
@@ -216,7 +239,7 @@ while True:
 				else:
 					obligar_toma_dos=True
 			if not hay_toma_dos:
-				l(1);esp(6); print("Tomas ",cascada_toma_dos," cartas, y pierdes el turno!")
+				l(1);esp(6); print("Tomas ",cascada_toma_dos," cartas!")
 				for i in range(cascada_toma_dos):
 					if len(mazo)==0:
 						pila_descarte, mazo=vaciar_pila_descarte_en_mazo(pila_descarte, mazo)
@@ -244,7 +267,7 @@ while True:
 				else:
 					obligar_toma_cuatro=True
 			if not hay_toma_cuatro:
-				l(1);esp(6); print("Tomas ",cascada_toma_cuatro," cartas, y pierdes el turno!")
+				l(1);esp(6); print("Tomas ",cascada_toma_cuatro," cartas!")
 				for i in range(cascada_toma_cuatro):
 					if len(mazo)==0:
 						pila_descarte, mazo=vaciar_pila_descarte_en_mazo(pila_descarte, mazo)
@@ -425,12 +448,10 @@ while True:
 					if comprobar_validez(lista_de_jugadores[jugador_actual][-1],pila_descarte[-1]):
 						carta_jugada=len(lista_de_jugadores[jugador_actual])-1
 					else:
-						#print ("La carta agarrada no es compatible")
-						#standby()
+						standby()
 						break;
 					#print("CPU agarro del mazo")
 
-				standby()
 
 				if carta_jugada!=-1:
 
@@ -484,6 +505,8 @@ while True:
 					#Finalmente, juega la carta
 					lista_de_jugadores[jugador_actual], pila_descarte=ponerCarta(lista_de_jugadores[jugador_actual],pila_descarte,carta_jugada)
 					lista_de_cartas_validas = []
+					l(1);esp(6);print("Carta jugada por la computdora: ", end="");pila_descarte[-1].mostrar_cara()
+					standby()
 					break;
 
 		else:
@@ -501,9 +524,14 @@ while True:
 	
 	# El flujo entra en el condicional si el jugador actual tiene CERO cartas, declarandolo ganador y finalizando la partida
 	if len(lista_de_jugadores[jugador_actual])==0:
-		clear()
-		l(2);esp(6);print("Felicitaciones "+lista_de_nombres[jugador_actual]+", ganaste la partida!")
-		break;
+		if jugador_actual_es_humano:
+			clear()
+			l(2);esp(6);print("Felicitaciones "+lista_de_nombres[jugador_actual]+", ganaste la partida!")
+			break;
+		else:
+			clear()
+			l(2);esp(6);print("El jugador ",jugador_actual+1," ganó la partida!")
+			break;
 	
 	# El flujo entra en el condicional si ocurrió algún error durante el turno, y se requiere inicial el turno nuevamente con el mismo jugador
 	if error:
@@ -525,7 +553,10 @@ while True:
 
 	#Las siguientes instrucciones determinan si el proximo jugador va a ser una computadora o un humano
 	if jugador_actual==0:
-		jugador_actual_es_humano=True
+		if un_humano:
+			jugador_actual_es_humano=True
+		else:
+			jugador_actual_es_humano=False
 	
 	if jugador_actual==1:
 		if dos_humanos:
