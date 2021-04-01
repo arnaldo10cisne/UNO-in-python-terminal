@@ -1,0 +1,12 @@
+LISTA DE COSAS PENDIENTES POR HACER, Y ERRORES PENDIENTES POR CORREGIR
+
+	1. Las cartas CAMBIA COLOR y TOMA CUATRO parecen tener un color universal, y no se 
+	muestran con su color neutro (BLANCO) luego de que un jugador anterior haya utilizado anteriormente
+
+	2. La computadora puede realizar jugadas simples, pero no puede ganar la partida
+
+	3. En la preparación de la partida, indicar no sólo los nombres de los jugadores, pero indicar cuales jugadores son CPU
+
+	4. Permitir partidas con 4 CPUs
+
+	5. Lograr que cuando el Mazo se vacie, la pila de descartes se convierta en el nuevo mazo
