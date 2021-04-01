@@ -28,7 +28,7 @@ while True:
 		clear();continue;
 	if opcion_menuPrincipal==1:
 		clear()
-		os.system('python partida.py') 
+		import partida
 		del opcion_menuPrincipal
 	elif opcion_menuPrincipal==2:
 		clear()
