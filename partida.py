@@ -164,12 +164,17 @@ while True:
 		# ********************************************************************************************************
 		# INICIO DE LA CONSTRUCCIÓN DEL TABLERO: Mostrar cada jugador, cuantas cartas tiene, el turno actual y la ultima carta de la pila de descartes
 		clear()
+		
+		#CÓDIGO PARA CONTROLAR CANTIDAD DE CARTAS DURANTE LA PARTIDA
+		"""
 		print("Cantidad de cartas en el mazo: ",end="");print(len(mazo))
 		print("Cantidad de cartas en la pila descarte: ",end="");print(len(pila_descarte))
 		print("Cantidad de cartas en Baraja 1: ",end="");print(len(baraja1))
 		print("Cantidad de cartas en Baraja 2: ",end="");print(len(baraja2))
 		if juegan_tres: print("Cantidad de cartas en Baraja 3: ",end="");print(len(baraja3))
 		if juegan_cuatro: print("Cantidad de cartas en Baraja 4: ",end="");print(len(baraja4))
+		"""
+		
 		l(2)
 		esp(6);print("Estado de la partida: ")
 		if jugador_actual==0:
