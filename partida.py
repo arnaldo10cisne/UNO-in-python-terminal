@@ -1,8 +1,7 @@
 from UNO_clases_funciones import *
 
 # ***** PANTALLA DE CONFIGURACIÓN INICIAL *****
-print("Holi")
-standby()
+
 while True:
 	# BOOLEANOS QUE INDICAN NUMERO DE JUGADORES, Y NUMERO DE HUMANOS
 	juegan_tres=False
@@ -71,11 +70,13 @@ while True:
 	if tres_humanos:
 		esp(4);print("Jugador 3: "+Fore.YELLOW+nombre_jugador_3)
 	else:
-		esp(4);print("Jugador 3: CPU")
+		if juegan_tres:
+			esp(4);print("Jugador 3: CPU")
 	if cuatro_humanos:
 		esp(4);print("Jugador 4: "+Fore.GREEN+nombre_jugador_4)
 	else:
-		esp(4);print("Jugador 4: CPU")
+		if juegan_cuatro:
+			esp(4);print("Jugador 4: CPU")
 	esp(4);print("Cada jugador tendrá "+str(numero_de_cartas_iniciales)+" cartas")
 	l(1);esp(4);r=input("¿Está bien esta configuración? si/no: ")
 	if r=="si":
@@ -95,7 +96,8 @@ if juegan_cuatro:
 	baraja4=[]
 lista_de_jugadores=[]
 lista_de_nombres=[]
-historial_de_jugadores=[]
+historial_de_jugadores=["----- Mazo"]
+orientacion = "↓  "
 
 # *** LAS SIGUIENTES INSTRUCCIONES TIENEN POR OBJETIVO CREAR EL MAZO DE CARTAS, Y BARAJEARLO
 mazo=crear_mazo(mazo)
@@ -166,16 +168,19 @@ while True:
 		# ********************************************************************************************************
 		# INICIO DE LA CONSTRUCCIÓN DEL TABLERO: Mostrar cada jugador, cuantas cartas tiene, el turno actual y la ultima carta de la pila de descartes
 		clear()
+		if control_de_flujo == 1:
+			orientacion = "↓  "
+		else:
+			orientacion = "↑  "
 		
 		#CÓDIGO PARA CONTROLAR CANTIDAD DE CARTAS DURANTE LA PARTIDA
-		"""
+
 		print("Cantidad de cartas en el mazo: ",end="");print(len(mazo))
 		print("Cantidad de cartas en la pila descarte: ",end="");print(len(pila_descarte))
 		print("Cantidad de cartas en Baraja 1: ",end="");print(len(baraja1))
 		print("Cantidad de cartas en Baraja 2: ",end="");print(len(baraja2))
 		if juegan_tres: print("Cantidad de cartas en Baraja 3: ",end="");print(len(baraja3))
 		if juegan_cuatro: print("Cantidad de cartas en Baraja 4: ",end="");print(len(baraja4))
-		"""
 		
 		l(2)
 		esp(6);print("Estado de la partida: ")
@@ -185,47 +190,49 @@ while True:
 			palabra_turno="              "
 		
 		if un_humano:
-			esp(6);print(palabra_turno, end="");print(Fore.RED+lista_de_nombres[0], end="");print(" tiene "+str(len(lista_de_jugadores[0]))+" cartas")
+			esp(6);print(orientacion+palabra_turno, end="");print(Fore.RED+lista_de_nombres[0], end="");print(" tiene "+str(len(lista_de_jugadores[0]))+" cartas")
 		else:
-			esp(6);print(palabra_turno, end="");print("El jugador 1 tiene "+str(len(lista_de_jugadores[0]))+" cartas")
+			esp(6);print(orientacion+palabra_turno, end="");print("El jugador 1 tiene "+str(len(lista_de_jugadores[0]))+" cartas")
 		if jugador_actual==1:
 			palabra_turno="TURNO ACTUAL: "
 		else:
 			palabra_turno="              "
 		if dos_humanos:
-			esp(6);print(palabra_turno, end="");print(Fore.BLUE+lista_de_nombres[1], end="");print(" tiene "+str(len(lista_de_jugadores[1]))+" cartas")
+			esp(6);print(orientacion+palabra_turno, end="");print(Fore.BLUE+lista_de_nombres[1], end="");print(" tiene "+str(len(lista_de_jugadores[1]))+" cartas")
 		else:
-			esp(6);print(palabra_turno, end="");print("El jugador 2 tiene "+str(len(lista_de_jugadores[1]))+" cartas")
+			esp(6);print(orientacion+palabra_turno, end="");print("El jugador 2 tiene "+str(len(lista_de_jugadores[1]))+" cartas")
 		if juegan_tres:
 			if jugador_actual==2:
 				palabra_turno="TURNO ACTUAL: "
 			else:
 				palabra_turno="              "
 			if tres_humanos:
-				esp(6);print(palabra_turno, end="");print(Fore.YELLOW+lista_de_nombres[2], end="");print(" tiene "+str(len(lista_de_jugadores[2]))+" cartas")
+				esp(6);print(orientacion+palabra_turno, end="");print(Fore.YELLOW+lista_de_nombres[2], end="");print(" tiene "+str(len(lista_de_jugadores[2]))+" cartas")
 			else:
-				esp(6);print(palabra_turno, end="");print("El jugador 3 tiene "+str(len(lista_de_jugadores[2]))+" cartas")
+				esp(6);print(orientacion+palabra_turno, end="");print("El jugador 3 tiene "+str(len(lista_de_jugadores[2]))+" cartas")
 		if juegan_cuatro:
 			if jugador_actual==3:
 				palabra_turno="TURNO ACTUAL: "
 			else:
 				palabra_turno="              "
 			if cuatro_humanos:
-				esp(6);print(palabra_turno, end="");print(Fore.GREEN+lista_de_nombres[3], end="");print(" tiene "+str(len(lista_de_jugadores[3]))+" cartas")
+				esp(6);print(orientacion+palabra_turno, end="");print(Fore.GREEN+lista_de_nombres[3], end="");print(" tiene "+str(len(lista_de_jugadores[3]))+" cartas")
 			else:
-				esp(6);print(palabra_turno, end="");print("El jugador 4 tiene "+str(len(lista_de_jugadores[3]))+" cartas")
+				esp(6);print(orientacion+palabra_turno, end="");print("El jugador 4 tiene "+str(len(lista_de_jugadores[3]))+" cartas")
 		l(1);linea(80);
 		if jugador_actual_es_humano:
-			l(1);esp(6);print("Turno de "+lista_de_nombres[jugador_actual]+". Presiona ENTER para mostrar la baraja")
+			l(1);esp(6);print("Turno de "+lista_de_nombres[jugador_actual]+". Presiona ENTER para mostrar tu baraja")
 		else:
-			l(1);esp(6);print("Turno del jugador ",jugador_actual+1,". Presiona ENTER para realizar la jugada.")
-		l(1);esp(6);print("      Ultima carta de la pila: ", end="");pila_descarte[-1].mostrar_cara();
+			l(1);esp(6);print("Turno del jugador ",jugador_actual+1,". Presiona ENTER para que la computadora realice la jugada.")
+		l(1);esp(6);print("ULTIMA CARTA --"+historial_de_jugadores[-1]+": ", end="");pila_descarte[-1].mostrar_cara();
 		if len(pila_descarte) >=2:
-			l(1);esp(6);print("Carta jugada por el Jugador "+str(historial_de_jugadores[-1])+": ", end=""); pila_descarte[-2].mostrar_cara();
+			esp(6);print("               "+str(historial_de_jugadores[-2])+": ", end=""); pila_descarte[-2].mostrar_cara()
 		if len(pila_descarte) >=3:
-			l(1);esp(6);print("Carta jugada por el Jugador "+str(historial_de_jugadores[-2])+": ", end=""); pila_descarte[-3].mostrar_cara();
-			if len(pila_descarte) >=4:
-			l(1);esp(6);print("Carta jugada por el Jugador "+str(historial_de_jugadores[-3])+": ", end=""); pila_descarte[-4].mostrar_cara();
+			esp(6);print("               "+str(historial_de_jugadores[-3])+": ", end=""); pila_descarte[-3].mostrar_cara()
+		if len(pila_descarte) >=4:
+			esp(6);print("               "+str(historial_de_jugadores[-4])+": ", end=""); pila_descarte[-4].mostrar_cara()
+		if len(pila_descarte) >=5:
+			esp(6);print("               "+str(historial_de_jugadores[-5])+": ", end=""); pila_descarte[-4].mostrar_cara()
 		standby()
 		linea(80);
 		# FIN DE LA CONSTRUCCION DEL TABLERO
@@ -250,10 +257,16 @@ while True:
 			if not hay_toma_dos:
 				l(1);esp(6); print("Tomas ",cascada_toma_dos," cartas!")
 				for i in range(cascada_toma_dos):
-					if len(mazo)==0:
-						pila_descarte, mazo=vaciar_pila_descarte_en_mazo(pila_descarte, mazo)
-						mazo=barajearMazo(mazo)
-					mazo, lista_de_jugadores[jugador_actual]=ponerCarta(mazo,lista_de_jugadores[jugador_actual],0)
+					#VACIARMAZO
+					if len(mazo)!=0:
+						mazo, lista_de_jugadores[jugador_actual]=ponerCarta(mazo,lista_de_jugadores[jugador_actual],0)
+					else:
+						if len(pila_descarte) >=2:
+							lista_de_jugadores[jugador_actual].append(pila_descarte[0])
+							pila_descarte.pop(0)
+						else:
+							l(1);esp(6); print("Agarraste "+str(i)+" cartas. Ya no hay más cartas en el mazo.")
+							break;
 				toma_dos=False
 				pierde_turno=True
 				cascada_toma_dos=0
@@ -278,10 +291,16 @@ while True:
 			if not hay_toma_cuatro:
 				l(1);esp(6); print("Tomas ",cascada_toma_cuatro," cartas!")
 				for i in range(cascada_toma_cuatro):
-					if len(mazo)==0:
-						pila_descarte, mazo=vaciar_pila_descarte_en_mazo(pila_descarte, mazo)
-						mazo=barajearMazo(mazo)
-					mazo, lista_de_jugadores[jugador_actual]=ponerCarta(mazo,lista_de_jugadores[jugador_actual],0)
+					#VACIARMAZO
+					if len(mazo)!=0:
+						mazo, lista_de_jugadores[jugador_actual]=ponerCarta(mazo,lista_de_jugadores[jugador_actual],0)
+					else:
+						if len(pila_descarte) >=2:
+							lista_de_jugadores[jugador_actual].append(pila_descarte[0])
+							pila_descarte.pop(0)
+						else:
+							l(1);esp(6); print("Agarraste "+str(i)+" cartas. Ya no hay más cartas en el mazo.")
+							break;
 				toma_cuatro=False
 				pierde_turno=True
 				cascada_toma_cuatro=0
@@ -316,12 +335,22 @@ while True:
 						clear();continue;
 				if carta_jugada==0:
 					tomo_del_mazo=True
-					if len(mazo)==0:
-						pila_descarte, mazo=vaciar_pila_descarte_en_mazo(pila_descarte, mazo)
-						mazo=barajearMazo(mazo)
-					mazo, lista_de_jugadores[jugador_actual]=ponerCarta(mazo,lista_de_jugadores[jugador_actual],-1)
+					#VACIARMAZO
+					if len(mazo)!=0:
+						mazo, lista_de_jugadores[jugador_actual]=ponerCarta(mazo,lista_de_jugadores[jugador_actual],0)
+					else:
+						if len(pila_descarte) >=2:
+							lista_de_jugadores[jugador_actual].append(pila_descarte[0])
+							pila_descarte.pop(0)
+						else:
+							l(1);esp(6); print("Ya no hay más cartas en el mazo. Pierdes el turno!")
+							standby()
+							break;
 					l(1);esp(6);print("Agarraste una carta del mazo")
-					esp(6);print("Nueva carta: ",end="");lista_de_jugadores[jugador_actual][-1].mostrar_cara()
+					if isinstance(lista_de_jugadores[jugador_actual][-1],masCuatro) or isinstance(lista_de_jugadores[jugador_actual][-1],cambia_color):
+						esp(6);print("Nueva carta: ",end="");lista_de_jugadores[jugador_actual][-1].mostrar_cara_sin_color()
+					else:
+						esp(6);print("Nueva carta: ",end="");lista_de_jugadores[jugador_actual][-1].mostrar_cara()
 					l(1);esp(6);jugar_carta_nueva=input("¿Deseas intentar jugar esta carta? si/no: ")
 					if jugar_carta_nueva=="si":
 						ultima_opcion=True
@@ -396,7 +425,7 @@ while True:
 
 						#Finalmente, juega la carta
 						lista_de_jugadores[jugador_actual], pila_descarte=ponerCarta(lista_de_jugadores[jugador_actual],pila_descarte,carta_jugada-1)
-						historial_de_jugadores.append(jugador_actual+1)
+						historial_de_jugadores.append(" Jugador " +str(jugador_actual+1))
 						break;
 					else:
 						# Entra aquí si la carta que el jugador quiere jugar NO es valida
@@ -449,10 +478,17 @@ while True:
 				# SI LA CARTA JUGADA ES "-1", LA COMPUTADORA VA A AGARRAR UNA CARTA DEL MAZO. SI LA CARTA QUE AGARRA ES VALIDA, LA JUGARÁ. SI NO, LA AGREGA A LA BARAJA Y TERMINA EL TURNO
 				if carta_jugada==-1:
 					tomo_del_mazo=True
-					if len(mazo)==0:
-						pila_descarte, mazo=vaciar_pila_descarte_en_mazo(pila_descarte, mazo)
-						mazo=barajearMazo(mazo)
-					mazo, lista_de_jugadores[jugador_actual]=ponerCarta(mazo,lista_de_jugadores[jugador_actual],-1)
+					#VACIARMAZO
+					if len(mazo)!=0:
+						mazo, lista_de_jugadores[jugador_actual]=ponerCarta(mazo,lista_de_jugadores[jugador_actual],0)
+					else:
+						if len(pila_descarte) >=2:
+							lista_de_jugadores[jugador_actual].append(pila_descarte[0])
+							pila_descarte.pop(0)
+						else:
+							l(1);esp(6); print("La computadora pierde el turno!")
+							standby()
+							break;
 					l(1);esp(6);print("La computadora agarró una carta del mazo")
 					#esp(6);print("Nueva carta: ",end="");lista_de_jugadores[jugador_actual][-1].mostrar_cara()
 					if comprobar_validez(lista_de_jugadores[jugador_actual][-1],pila_descarte[-1]):
@@ -514,7 +550,7 @@ while True:
 							cascada_toma_cuatro=cascada_toma_cuatro+4
 					#Finalmente, juega la carta
 					lista_de_jugadores[jugador_actual], pila_descarte=ponerCarta(lista_de_jugadores[jugador_actual],pila_descarte,carta_jugada)
-					historial_de_jugadores.append(jugador_actual+1)
+					historial_de_jugadores.append(" Jugador " +str(jugador_actual+1))
 					lista_de_cartas_validas = []
 					l(1);esp(6);print("Carta jugada por la computdora: ", end="");pila_descarte[-1].mostrar_cara()
 					standby()

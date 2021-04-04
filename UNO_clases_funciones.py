@@ -355,6 +355,9 @@ class masCuatro(carta_negra):
 		elif self.color=="ROJO":
 			print(Fore.RED+"TOMA CUATRO")
 
+	def mostrar_cara_sin_color(self):
+		print("TOMA CUATRO")
+
 
 	def devolver_tipo(self):
 		return self.tipo
@@ -379,6 +382,9 @@ class cambia_color(carta_negra):
 			print(Fore.YELLOW+"CAMBIA COLOR")
 		elif self.color=="ROJO":
 			print(Fore.RED+"CAMBIA COLOR")
+
+	def mostrar_cara_sin_color(self):
+		print("CAMBIA COLOR")
 
 	def devolver_tipo(self):
 		return self.tipo
@@ -482,7 +488,10 @@ def mostrarBaraja(baraja,sangria):
 	esp(sangria);print("Elige una carta para jugar: ")
 	for i in range(len(baraja)):
 		esp(sangria);print(str(i+1)+". ", end="")
-		baraja[i].mostrar_cara()
+		if isinstance(baraja[i],cambia_color) or isinstance(baraja[i],masCuatro):
+			baraja[i].mostrar_cara_sin_color()
+		else:
+			baraja[i].mostrar_cara()
 
 def comprobar_validez(carta_elegida,carta_descarte):
 	try:
@@ -507,9 +516,3 @@ def ponerCarta(baraja_origen,mazo_destino,posicion):
 	mazo_destino.append(baraja_origen[posicion])
 	baraja_origen.remove(baraja_origen[posicion])
 	return baraja_origen, mazo_destino
-
-def vaciar_pila_descarte_en_mazo(pila_descarte, mazo):
-	for i in range(len(pila_descarte)-1):
-		mazo_destino.append(pila_descarte[i])
-		pila_descarte.remove(pila_descarte[i])
-	return pila_descarte, mazo

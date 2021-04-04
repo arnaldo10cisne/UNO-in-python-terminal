@@ -1,10 +1,5 @@
 LISTA DE COSAS PENDIENTES POR HACER, Y ERRORES PENDIENTES POR CORREGIR
 
-	* Las cartas CAMBIA COLOR y TOMA CUATRO parecen tener un color universal, y no se 
-	muestran con su color neutro (BLANCO) luego de que un jugador anterior haya utilizado anteriormente
-
-	* Lograr que cuando el Mazo se vacie, la pila de descartes se convierta en el nuevo mazo
-
 	* Agregar soporte para idioma INGLES
 
 	* Despues de iniciar una partida una vez, al salir o terminar la partida, no se puede iniciar otra
