@@ -1,7 +1,8 @@
 from UNO_clases_funciones import *
 
 # ***** PANTALLA DE CONFIGURACIÓN INICIAL *****
-
+print("Holi")
+standby()
 while True:
 	# BOOLEANOS QUE INDICAN NUMERO DE JUGADORES, Y NUMERO DE HUMANOS
 	juegan_tres=False
@@ -94,6 +95,7 @@ if juegan_cuatro:
 	baraja4=[]
 lista_de_jugadores=[]
 lista_de_nombres=[]
+historial_de_jugadores=[]
 
 # *** LAS SIGUIENTES INSTRUCCIONES TIENEN POR OBJETIVO CREAR EL MAZO DE CARTAS, Y BARAJEARLO
 mazo=crear_mazo(mazo)
@@ -217,11 +219,13 @@ while True:
 			l(1);esp(6);print("Turno de "+lista_de_nombres[jugador_actual]+". Presiona ENTER para mostrar la baraja")
 		else:
 			l(1);esp(6);print("Turno del jugador ",jugador_actual+1,". Presiona ENTER para realizar la jugada.")
-		l(1);esp(6);print("Ultima carta de la pila: ", end="");pila_descarte[-1].mostrar_cara();
+		l(1);esp(6);print("      Ultima carta de la pila: ", end="");pila_descarte[-1].mostrar_cara();
 		if len(pila_descarte) >=2:
-			l(1);esp(6);print(" -- ", end=""); pila_descarte[-2].mostrar_cara();
+			l(1);esp(6);print("Carta jugada por el Jugador "+str(historial_de_jugadores[-1])+": ", end=""); pila_descarte[-2].mostrar_cara();
 		if len(pila_descarte) >=3:
-			l(1);esp(6);print(" -- ", end=""); pila_descarte[-3].mostrar_cara();
+			l(1);esp(6);print("Carta jugada por el Jugador "+str(historial_de_jugadores[-2])+": ", end=""); pila_descarte[-3].mostrar_cara();
+			if len(pila_descarte) >=4:
+			l(1);esp(6);print("Carta jugada por el Jugador "+str(historial_de_jugadores[-3])+": ", end=""); pila_descarte[-4].mostrar_cara();
 		standby()
 		linea(80);
 		# FIN DE LA CONSTRUCCION DEL TABLERO
@@ -392,6 +396,7 @@ while True:
 
 						#Finalmente, juega la carta
 						lista_de_jugadores[jugador_actual], pila_descarte=ponerCarta(lista_de_jugadores[jugador_actual],pila_descarte,carta_jugada-1)
+						historial_de_jugadores.append(jugador_actual+1)
 						break;
 					else:
 						# Entra aquí si la carta que el jugador quiere jugar NO es valida
@@ -509,6 +514,7 @@ while True:
 							cascada_toma_cuatro=cascada_toma_cuatro+4
 					#Finalmente, juega la carta
 					lista_de_jugadores[jugador_actual], pila_descarte=ponerCarta(lista_de_jugadores[jugador_actual],pila_descarte,carta_jugada)
+					historial_de_jugadores.append(jugador_actual+1)
 					lista_de_cartas_validas = []
 					l(1);esp(6);print("Carta jugada por la computdora: ", end="");pila_descarte[-1].mostrar_cara()
 					standby()
@@ -585,6 +591,7 @@ del mazo
 del pila_descarte
 del baraja1
 del baraja2
+del historial_de_jugadores
 if juegan_tres:
 	del baraja3
 if juegan_cuatro:
