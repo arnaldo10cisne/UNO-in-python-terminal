@@ -1,4 +1,5 @@
 from UNO_clases_funciones import *
+from partida import *
 
 # RECREACIÓN DEL JUEGO DE CARTAS UNO EN PYTHON
 # PROGRAMA REALIZADO POR ARNALDO CISNEROS
@@ -27,8 +28,7 @@ while True:
 	if opcion_menuPrincipal<1 or opcion_menuPrincipal>3:
 		clear();continue;
 	if opcion_menuPrincipal==1:
-		clear()
-		import partida
+		partida()
 		del opcion_menuPrincipal
 	elif opcion_menuPrincipal==2:
 		clear()

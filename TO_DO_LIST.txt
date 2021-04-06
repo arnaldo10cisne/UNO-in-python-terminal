@@ -2,8 +2,6 @@ LISTA DE COSAS PENDIENTES POR HACER, Y ERRORES PENDIENTES POR CORREGIR
 
 	* Agregar soporte para idioma INGLES
 
-	* Despues de iniciar una partida una vez, al salir o terminar la partida, no se puede iniciar otra
-
 	* Para salir del juego desde el menú principal, se re quiere seleccionar la opción "Salir" 2 veces
 
 	* Corregir errores ortográficos
