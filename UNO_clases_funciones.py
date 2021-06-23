@@ -6,7 +6,11 @@ import random #DOCU: https://www.youtube.com/watch?v=PoUcplbntYo&ab_channel=Leon
 
 # Métodos Estéticos y de Espera de respuesta
 
-def clear(): os.system("cls");
+def clear(): 
+	if os.name=="nt":
+		os.system("cls");
+	else:
+		os.system("clear");
 
 def l(n): 
 	for i in range(n): print("");
