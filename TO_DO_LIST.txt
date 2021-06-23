@@ -2,6 +2,8 @@ LISTA DE COSAS PENDIENTES POR HACER, Y ERRORES PENDIENTES POR CORREGIR
 
 	* Agregar soporte para idioma INGLES
 
-	* Para salir del juego desde el menú principal, se re quiere seleccionar la opción "Salir" 2 veces
+	* Para salir del juego desde el menú principal, se requiere seleccionar la opción "Salir" 2 veces
 
 	* Corregir errores ortográficos
+
+	* Buenas prácticas: 2 líneas vacias entre cada función

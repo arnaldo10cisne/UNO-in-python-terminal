@@ -4,7 +4,9 @@ from colorama import *
 init(autoreset=True) # VER https://pypi.org/project/colorama/
 import random #DOCU: https://www.youtube.com/watch?v=PoUcplbntYo&ab_channel=LeonardoKuffo
 
+
 # Métodos Estéticos y de Espera de respuesta
+
 
 def clear(): 
 	if os.name=="nt":
@@ -12,20 +14,26 @@ def clear():
 	else:
 		os.system("clear");
 
+
 def l(n): 
 	for i in range(n): print("");
 
+
 def standby(): a=input()
+
 
 def esp(n):
 	for i in range(n):
 		print(" ", end="")
 
+
 def linea(n):
 	for i in range(n): print("-", end="");
 	print("")
 
+
 # CLASES
+
 
 class carta():
 	def __init__(self, color):
@@ -40,6 +48,7 @@ class carta():
 	def informacion_general(self):
 		print("Esta carta tiene el color "+self.color)
 
+
 class carta_verde(carta):
 	def __init__(self, color):
 		super().__init__(color)
@@ -50,6 +59,7 @@ class carta_verde(carta):
 
 	def devolver_color(self):
 		return "VERDE"
+
 
 class carta_azul(carta):
 	def __init__(self, color):
@@ -62,6 +72,7 @@ class carta_azul(carta):
 	def devolver_color(self):
 		return "AZUL"
 
+
 class carta_roja(carta):
 	def __init__(self, color):
 		super().__init__(color)
@@ -73,6 +84,7 @@ class carta_roja(carta):
 	def devolver_color(self):
 		return "ROJO"
 
+
 class carta_amarilla(carta):
 	def __init__(self, color):
 		super().__init__(color)
@@ -83,6 +95,7 @@ class carta_amarilla(carta):
 
 	def devolver_color(self):
 		return "AMARILLO"
+
 
 class carta_negra(carta):
 	def __init__(self, color):
@@ -97,6 +110,7 @@ class carta_negra(carta):
 
 	def devolver_color(self):
 		return self.color
+
 
 class numero_verde(carta_verde):
 	def __init__(self, numero):
@@ -113,6 +127,7 @@ class numero_verde(carta_verde):
 	def devolver_numero(self):
 		return self.numero
 
+
 class numero_azul(carta_azul):
 	def __init__(self, numero):
 		super().__init__("AZUL")
@@ -127,6 +142,7 @@ class numero_azul(carta_azul):
 
 	def devolver_numero(self):
 		return self.numero
+
 
 class numero_rojo(carta_roja):
 	def __init__(self, numero):
@@ -143,6 +159,7 @@ class numero_rojo(carta_roja):
 	def devolver_numero(self):
 		return self.numero
 
+
 class numero_amarillo(carta_amarilla):
 	def __init__(self, numero):
 		super().__init__("AMARILLO")
@@ -157,6 +174,7 @@ class numero_amarillo(carta_amarilla):
 
 	def devolver_numero(self):
 		return self.numero
+
 
 class masDos_verde(carta_verde):
 	def __init__(self):
@@ -173,6 +191,7 @@ class masDos_verde(carta_verde):
 	def devolver_tipo(self):
 		return self.tipo
 
+
 class masDos_azul(carta_azul):
 	def __init__(self):
 		super().__init__("AZUL")
@@ -187,6 +206,7 @@ class masDos_azul(carta_azul):
 
 	def devolver_tipo(self):
 		return self.tipo
+
 
 class masDos_amarillo(carta_amarilla):
 	def __init__(self):
@@ -203,6 +223,7 @@ class masDos_amarillo(carta_amarilla):
 	def devolver_tipo(self):
 		return self.tipo
 
+
 class masDos_rojo(carta_roja):
 	def __init__(self):
 		super().__init__("ROJO")
@@ -217,6 +238,7 @@ class masDos_rojo(carta_roja):
 
 	def devolver_tipo(self):
 		return self.tipo
+
 
 class bloqueo_verde(carta_verde):
 	def __init__(self):
@@ -233,6 +255,7 @@ class bloqueo_verde(carta_verde):
 	def devolver_tipo(self):
 		return self.tipo
 
+
 class bloqueo_azul(carta_azul):
 	def __init__(self):
 		super().__init__("AZUL")
@@ -247,6 +270,7 @@ class bloqueo_azul(carta_azul):
 
 	def devolver_tipo(self):
 		return self.tipo
+
 
 class bloqueo_amarillo(carta_amarilla):
 	def __init__(self):
@@ -263,6 +287,7 @@ class bloqueo_amarillo(carta_amarilla):
 	def devolver_tipo(self):
 		return self.tipo
 
+
 class bloqueo_rojo(carta_roja):
 	def __init__(self):
 		super().__init__("ROJO")
@@ -277,6 +302,7 @@ class bloqueo_rojo(carta_roja):
 
 	def devolver_tipo(self):
 		return self.tipo
+
 
 class reverso_verde(carta_verde):
 	def __init__(self):
@@ -293,6 +319,7 @@ class reverso_verde(carta_verde):
 	def devolver_tipo(self):
 		return self.tipo
 
+
 class reverso_azul(carta_azul):
 	def __init__(self):
 		super().__init__("AZUL")
@@ -307,6 +334,7 @@ class reverso_azul(carta_azul):
 
 	def devolver_tipo(self):
 		return self.tipo
+
 
 class reverso_amarillo(carta_amarilla):
 	def __init__(self):
@@ -323,6 +351,7 @@ class reverso_amarillo(carta_amarilla):
 	def devolver_tipo(self):
 		return self.tipo
 
+
 class reverso_rojo(carta_roja):
 	def __init__(self):
 		super().__init__("ROJO")
@@ -337,6 +366,7 @@ class reverso_rojo(carta_roja):
 
 	def devolver_tipo(self):
 		return self.tipo
+
 
 class masCuatro(carta_negra):
 	def __init__(self):
@@ -366,6 +396,7 @@ class masCuatro(carta_negra):
 	def devolver_tipo(self):
 		return self.tipo
 
+
 class cambia_color(carta_negra):
 	def __init__(self):
 		super().__init__("NEGRO")
@@ -393,7 +424,9 @@ class cambia_color(carta_negra):
 	def devolver_tipo(self):
 		return self.tipo
 
+
 # METODOS DE CREACION Y MANIPULACION DE BARAJAS Y MAZOS
+
 
 def crear_mazo(mazo_creado):
 	cartas_especiales=["+2","reverso","bloqueo"]
@@ -468,6 +501,7 @@ def crear_mazo(mazo_creado):
 			del carta_creada
 	return mazo_creado
 
+
 def crearBaraja(mazo_origen, numero_de_cartas):
 	baraja=[]
 	for i in range(numero_de_cartas):
@@ -476,6 +510,7 @@ def crearBaraja(mazo_origen, numero_de_cartas):
 		baraja.append(carta_elegida)
 		mazo_origen.remove(mazo_origen[posicion])
 	return mazo_origen, baraja
+
 
 def barajearMazo(mazoParametro):
 	auxiliar=[]
@@ -487,6 +522,7 @@ def barajearMazo(mazoParametro):
 	mazoParametro=auxiliar
 	return mazoParametro
 
+
 def mostrarBaraja(baraja,sangria):
 	l(1)
 	esp(sangria);print("Elige una carta para jugar: ")
@@ -496,6 +532,7 @@ def mostrarBaraja(baraja,sangria):
 			baraja[i].mostrar_cara_sin_color()
 		else:
 			baraja[i].mostrar_cara()
+
 
 def comprobar_validez(carta_elegida,carta_descarte):
 	try:
@@ -516,7 +553,9 @@ def comprobar_validez(carta_elegida,carta_descarte):
 		print("Hubo un error dentro de la funcion comprobar_validez()")
 		standby()
 
+
 def ponerCarta(baraja_origen,mazo_destino,posicion):
 	mazo_destino.append(baraja_origen[posicion])
 	baraja_origen.remove(baraja_origen[posicion])
 	return baraja_origen, mazo_destino
+

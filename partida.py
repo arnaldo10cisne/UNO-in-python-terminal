@@ -1,6 +1,8 @@
 from UNO_clases_funciones import *
 
+
 # ***** PANTALLA DE CONFIGURACIÓN INICIAL *****
+
 
 def partida():
 	clear()
@@ -87,6 +89,7 @@ def partida():
 		else:
 			clear()
 
+	
 	# *** LAS SIGUIENTES INSTRUCCIONES TIENEN POR OBJETIVO CREAR LAS LISTAS QUE SE VAN A UTILIZAR DURANTE LA EJECUCIÓN DEL PROGRAMA
 	mazo=[]
 	pila_descarte=[]
@@ -101,10 +104,12 @@ def partida():
 	historial_de_jugadores=["----- Mazo"]
 	orientacion = "↓  "
 
+	
 	# *** LAS SIGUIENTES INSTRUCCIONES TIENEN POR OBJETIVO CREAR EL MAZO DE CARTAS, Y BARAJEARLO
 	mazo=crear_mazo(mazo)
 	mazo=barajearMazo(mazo)
 
+	
 	# *** LAS SIGUIENTES INSTRUCCIONES TIENEN POR OBJETIVO REPARTIR LAS CARTAS DEL MAZO EN CADA UNA DE LAS BARAJAS EN NÚMEROS IGUALES
 	mazo, baraja1=crearBaraja(mazo ,numero_de_cartas_iniciales)
 	mazo, baraja2=crearBaraja(mazo ,numero_de_cartas_iniciales)
@@ -113,6 +118,7 @@ def partida():
 	if juegan_cuatro:
 		mazo, baraja4=crearBaraja(mazo ,numero_de_cartas_iniciales)
 
+	
 	# *** LAS SIGUIENTES INSTRUCCIONES TIENEN POR OBJETIVO PONER DEL MAZO LA PRIMERA CARTA EN LA PILA DE DESCARTE, ASEGURANDOSE QUE ESA CARTA SEA UN NUMERO, Y NO UNA CARTA ESPECIAL
 	while True:
 		if isinstance(mazo[0], numero_verde) or isinstance(mazo[0], numero_azul) or isinstance(mazo[0], numero_rojo) or isinstance(mazo[0], numero_amarillo):
@@ -121,6 +127,7 @@ def partida():
 		else:
 			mazo=barajearMazo(mazo)
 
+	
 	# *** LAS SIGUIENTES INSTRUCCIONES TIENEN POR OBJETIVO AÑADIR LAS BARAJAS CREADAS A LA LISTA DE JUGADORES, PARA ORIENTAR EL FLUJO DEL JUEGO
 	lista_de_jugadores.append(baraja1)
 	lista_de_jugadores.append(baraja2)
@@ -129,6 +136,7 @@ def partida():
 	if juegan_cuatro:
 		lista_de_jugadores.append(baraja4)
 
+	
 	# *** LAS SIGUIENTES INSTRUCCIONES TIENEN POR OBJETIVO AGREGAR LOS NOMBRES DE LOS JUGADORES A UNA LISTA PARA PODER SER UTILZADOS DURANTE EL PROGRAMA
 	if un_humano:
 		lista_de_nombres.append(nombre_jugador_1)
@@ -139,6 +147,7 @@ def partida():
 	if cuatro_humanos:	
 		lista_de_nombres.append(nombre_jugador_4)
 
+	
 	# *** LAS SIGUIENTES VARIABLES TIENEN EL OBJETIVO DE CONTROLAR EL FLUJO DEL JUEGO Y TAMBIÉN CREAR LOS EFECTOS DE LAS CARTAS ESPECIALES
 	control_de_flujo=1
 	jugador_actual=0
@@ -167,6 +176,7 @@ def partida():
 		#CICLO DEL TURNO DEL JUGADOR ACTUAL
 		while True:
 
+
 			# ********************************************************************************************************
 			# INICIO DE LA CONSTRUCCIÓN DEL TABLERO: Mostrar cada jugador, cuantas cartas tiene, el turno actual y la ultima carta de la pila de descartes
 			clear()
@@ -175,16 +185,9 @@ def partida():
 			else:
 				orientacion = "↑  "
 			
+
 			#CÓDIGO PARA CONTROLAR CANTIDAD DE CARTAS DURANTE LA PARTIDA
 
-			"""
-			print("Cantidad de cartas en el mazo: ",end="");print(len(mazo))
-			print("Cantidad de cartas en la pila descarte: ",end="");print(len(pila_descarte))
-			print("Cantidad de cartas en Baraja 1: ",end="");print(len(baraja1))
-			print("Cantidad de cartas en Baraja 2: ",end="");print(len(baraja2))
-			if juegan_tres: print("Cantidad de cartas en Baraja 3: ",end="");print(len(baraja3))
-			if juegan_cuatro: print("Cantidad de cartas en Baraja 4: ",end="");print(len(baraja4))
-			"""
 			
 			l(2)
 			esp(6);print("Estado de la partida: ")
@@ -447,37 +450,18 @@ def partida():
 								clear()
 				#ENTRA AQUÍ SI EL JUGADOR ACTUAL ES UNA COMPUTADORA
 				else:
-					"""
-					print("Baraja inicial del cpu (restar 1 a las posiciones)")
-					mostrarBaraja(lista_de_jugadores[jugador_actual],6)
-					standby()
-					"""
 
 					#Primero creamos una lista con las posiciones de las cartas que SI se pueden jugar
 					for i in range(len(lista_de_jugadores[jugador_actual])):
 						if comprobar_validez(lista_de_jugadores[jugador_actual][i],pila_descarte[-1]):
 							lista_de_cartas_validas.append(i)
-					"""
-					if len(lista_de_cartas_validas) > 0:
-						print("posiciones de cartas validas")
-						print(lista_de_cartas_validas)
-					else:
-						print("No hay cartas validas")
-					standby()
-					"""
+					
 					#LUEGO ASIGNAMOS DE MANERA ALEATORIA LA CARTA QUE LA COMPUTADORA VA A JUGAR. SI NO HAY CARTAS VALIDAS, LA COMPUTADORA TOMA UNA CARTA DEL MAZO
 					if len(lista_de_cartas_validas)!=0:
 						posicion_aleatoria=random.randint(1,len(lista_de_cartas_validas))-1
 						carta_jugada=lista_de_cartas_validas[posicion_aleatoria]
 					else: 
 						carta_jugada=-1
-
-					"""
-					print("Va a jugar la carta ", carta_jugada)
-					if carta_jugada==-1:
-						print("CPU va a agarrar del mazo")
-					standby()
-					"""
 
 					# SI LA CARTA JUGADA ES "-1", LA COMPUTADORA VA A AGARRAR UNA CARTA DEL MAZO. SI LA CARTA QUE AGARRA ES VALIDA, LA JUGARÁ. SI NO, LA AGREGA A LA BARAJA Y TERMINA EL TURNO
 					if carta_jugada==-1:
