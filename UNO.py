@@ -56,6 +56,7 @@ def run():
 			esp(40);print("GRACIAS POR JUGAR!")
 			esp(36);print("Presione ENTER para salir")
 			standby()
+			clear()
 			break;
 
 
