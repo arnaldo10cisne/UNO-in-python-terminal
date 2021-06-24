@@ -184,9 +184,6 @@ def partida():
 				orientacion = "↓  "
 			else:
 				orientacion = "↑  "
-			
-
-			#CÓDIGO PARA CONTROLAR CANTIDAD DE CARTAS DURANTE LA PARTIDA
 
 			
 			l(2)
@@ -195,6 +192,7 @@ def partida():
 				palabra_turno="TURNO ACTUAL: "
 			else:
 				palabra_turno="              "
+			
 			
 			if un_humano:
 				esp(6);print(orientacion+palabra_turno, end="");print(Fore.RED+lista_de_nombres[0], end="");print(" tiene "+str(len(lista_de_jugadores[0]))+" cartas")
@@ -245,6 +243,7 @@ def partida():
 			# FIN DE LA CONSTRUCCION DEL TABLERO
 			# ********************************************************************************************************
 			
+
 			# Este es el condicional de TOMA DOS. Entra en el siempre que la carta anterior haya sido un TOMA DOS
 			if toma_dos:
 				hay_toma_dos=False
@@ -264,7 +263,6 @@ def partida():
 				if not hay_toma_dos:
 					l(1);esp(6); print("Tomas ",cascada_toma_dos," cartas!")
 					for i in range(cascada_toma_dos):
-						#VACIARMAZO
 						if len(mazo)!=0:
 							mazo, lista_de_jugadores[jugador_actual]=ponerCarta(mazo,lista_de_jugadores[jugador_actual],0)
 						else:
@@ -279,6 +277,7 @@ def partida():
 					cascada_toma_dos=0
 					obligar_toma_dos=False
 			
+
 			# Este es el condicional de TOMA CUATRO. Entra en el siempre que la carta anterior haya sido un TOMA CUATRO
 			if toma_cuatro:
 				hay_toma_cuatro=False
@@ -313,25 +312,34 @@ def partida():
 					cascada_toma_cuatro=0
 					obligar_toma_cuatro=False
 			
+
 			# Este es el condicional de JUGAR UNA CARTA. Entra en el siempre que el jugador actual no haya perdido el turno
 			if not pierde_turno:
+				
+				
 				#ENTRA AQUÍ SI EL JUGADOR ACTUAL ES UN HUMANO
 				if jugador_actual_es_humano:
 					mostrarBaraja(lista_de_jugadores[jugador_actual],6)
 					l(1);esp(6);print("Otras opciones:")
 					esp(6);print("0. Agarrar una carta del mazo")
 					esp(6);print("-1. Salir de la partida")
+					
+					
 					try:
 						l(1);linea(80);
 						l(1);esp(6);carta_jugada=int(input("¿Qué carta deseas jugar?: "))
 					except:
 						error=True
 						break;
+					
+					
 					if carta_jugada<-1 or carta_jugada>len(lista_de_jugadores[jugador_actual]) :
 						l(1);esp(6);print("NÚMERO NO VALIDO, INTENTA DE NUEVO")
 						standby()
 						clear()
 						break;
+					
+					
 					if carta_jugada==-1:
 						l(1);linea(80);
 						l(1);esp(6);opcion_salir=input("¿Seguro que deseas abandonar la partida? si/no: ")
@@ -340,9 +348,10 @@ def partida():
 							break;
 						else:
 							clear();continue;
+					
+					
 					if carta_jugada==0:
 						tomo_del_mazo=True
-						#VACIARMAZO
 						if len(mazo)!=0:
 							mazo, lista_de_jugadores[jugador_actual]=ponerCarta(mazo,lista_de_jugadores[jugador_actual],0)
 						else:
@@ -364,7 +373,10 @@ def partida():
 							carta_jugada=len(lista_de_jugadores[jugador_actual])
 						else:
 							break;
+					
+					
 					if carta_jugada!=0:
+						
 						
 						# Este condicional determina si estamos obligando al jugador a jugar un TOMA DOS debido a que indicó que tiene uno para defenderse
 						if obligar_toma_dos and not(isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],masDos_verde) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],masDos_rojo) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],masDos_azul) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],masDos_amarillo)):
@@ -373,6 +385,7 @@ def partida():
 							error=True
 							break;
 						
+						
 						# Este condicional determina si estamos obligando al jugador a jugar un TOMA CUATRO debido a que indicó que tiene uno para defenderse
 						if obligar_toma_cuatro and not(isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],masCuatro)):
 							l(1);esp(6);print("Debes jugar un Toma Cuatro!")
@@ -380,24 +393,29 @@ def partida():
 							error=True
 							break;
 						
+						
 						# Este condicional es para determinar si la carta que quiere jugar la persona es válida o no
 						if comprobar_validez(lista_de_jugadores[jugador_actual][carta_jugada-1],pila_descarte[-1]):
 							# Entra aquí si la carta es valida
 							
+
 							#Entra aquí si el jugador quiere jugar un TOMA DOS
 							if isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],masDos_verde) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],masDos_rojo) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],masDos_azul) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],masDos_amarillo): 
 								toma_dos=True
 								cascada_toma_dos=cascada_toma_dos+2
 							
+
 							#Entra aquí si el jugador quiere jugar un PIERDE TURNO
 							if isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],bloqueo_verde) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],bloqueo_azul) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],bloqueo_rojo) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],bloqueo_amarillo): 
 								pierde_turno=True
 							
+
 							#Entra aquí si el jugador quiere jugar un REVERSO
 							if isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],reverso_verde) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],reverso_azul) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],reverso_rojo) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1],reverso_amarillo): 
 								carta_reverso=True
 								control_de_flujo=control_de_flujo*(-1)
 							
+
 							#Entra aquí si el jugador quiere jugar un CAMBIA COLOR o un TOMA CUATRO
 							if isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1], cambia_color) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1], masCuatro):
 								# Primero se le pide al jugador elegir el color nuevo
@@ -425,16 +443,22 @@ def partida():
 								elif color_elegido==4:
 									lista_de_jugadores[jugador_actual][carta_jugada-1].asignar_color("AMARILLO")
 								
+								
 								# Luego de elegir el color, si la carta es un TOMA CUATRO, entra aquí
 								if isinstance(lista_de_jugadores[jugador_actual][carta_jugada-1], masCuatro):
 									toma_cuatro=True
 									cascada_toma_cuatro=cascada_toma_cuatro+4
 
+							
 							#Finalmente, juega la carta
 							lista_de_jugadores[jugador_actual], pila_descarte=ponerCarta(lista_de_jugadores[jugador_actual],pila_descarte,carta_jugada-1)
 							historial_de_jugadores.append(" Jugador " +str(jugador_actual+1))
 							break;
+						
+						
 						else:
+							
+							
 							# Entra aquí si la carta que el jugador quiere jugar NO es valida
 							if ultima_opcion:
 								#Entra aquí si la carta que no es valida la acaba de tomar del mazo
@@ -443,18 +467,24 @@ def partida():
 								standby()
 								clear()
 								break;
+							
+							
 							else:
 								#Entra aquí si la carta que no es valida es una de su baraja, y puede probar otra o agarrar del mazo
 								l(1);esp(6);print("CARTA NO VALIDA, PRUEBA OTRA O TOMA UNA CARTA DEL MAZO")
 								standby()
 								clear()
+				
+				
 				#ENTRA AQUÍ SI EL JUGADOR ACTUAL ES UNA COMPUTADORA
 				else:
 
+					
 					#Primero creamos una lista con las posiciones de las cartas que SI se pueden jugar
 					for i in range(len(lista_de_jugadores[jugador_actual])):
 						if comprobar_validez(lista_de_jugadores[jugador_actual][i],pila_descarte[-1]):
 							lista_de_cartas_validas.append(i)
+					
 					
 					#LUEGO ASIGNAMOS DE MANERA ALEATORIA LA CARTA QUE LA COMPUTADORA VA A JUGAR. SI NO HAY CARTAS VALIDAS, LA COMPUTADORA TOMA UNA CARTA DEL MAZO
 					if len(lista_de_cartas_validas)!=0:
@@ -463,10 +493,10 @@ def partida():
 					else: 
 						carta_jugada=-1
 
+					
 					# SI LA CARTA JUGADA ES "-1", LA COMPUTADORA VA A AGARRAR UNA CARTA DEL MAZO. SI LA CARTA QUE AGARRA ES VALIDA, LA JUGARÁ. SI NO, LA AGREGA A LA BARAJA Y TERMINA EL TURNO
 					if carta_jugada==-1:
 						tomo_del_mazo=True
-						#VACIARMAZO
 						if len(mazo)!=0:
 							mazo, lista_de_jugadores[jugador_actual]=ponerCarta(mazo,lista_de_jugadores[jugador_actual],0)
 						else:
@@ -478,17 +508,16 @@ def partida():
 								standby()
 								break;
 						l(1);esp(6);print("La computadora agarró una carta del mazo")
-						#esp(6);print("Nueva carta: ",end="");lista_de_jugadores[jugador_actual][-1].mostrar_cara()
 						if comprobar_validez(lista_de_jugadores[jugador_actual][-1],pila_descarte[-1]):
 							carta_jugada=len(lista_de_jugadores[jugador_actual])-1
 						else:
 							standby()
 							break;
-						#print("CPU agarro del mazo")
 
 
 					if carta_jugada!=-1:
 
+						
 						# Este ciclo con condicional asegura que la computadora va a jugar un TOMA DOS en caso de verse obligado a hacerlo porque esta siendo atacada
 						while True:
 							if obligar_toma_dos and not(isinstance(lista_de_jugadores[jugador_actual][carta_jugada],masDos_verde) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],masDos_rojo) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],masDos_azul) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],masDos_amarillo)):
@@ -496,6 +525,7 @@ def partida():
 								carta_jugada=lista_de_cartas_validas[posicion_aleatoria]
 							else:
 								break;
+						
 						
 						# Este ciclo con condicional asegura que la computadora va a jugar un TOMA CUATRO en caso de verse obligado a hacerlo porque esta siendo atacada
 						while True:
@@ -506,21 +536,24 @@ def partida():
 								break;
 						
 
-						#Entra aquí si el jugador quiere jugar un TOMA DOS
+						#Entra aquí si la computadora juega un TOMA DOS
 						if isinstance(lista_de_jugadores[jugador_actual][carta_jugada],masDos_verde) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],masDos_rojo) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],masDos_azul) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],masDos_amarillo): 
 							toma_dos=True
 							cascada_toma_dos=cascada_toma_dos+2
 							
-						#Entra aquí si el jugador quiere jugar un PIERDE TURNO
+						
+						#Entra aquí si la computadora juega un PIERDE TURNO
 						if isinstance(lista_de_jugadores[jugador_actual][carta_jugada],bloqueo_verde) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],bloqueo_azul) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],bloqueo_rojo) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],bloqueo_amarillo): 
 							pierde_turno=True
 							
-						#Entra aquí si el jugador quiere jugar un REVERSO
+						
+						#Entra aquí si la computadora juega un REVERSO
 						if isinstance(lista_de_jugadores[jugador_actual][carta_jugada],reverso_verde) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],reverso_azul) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],reverso_rojo) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada],reverso_amarillo): 
 							carta_reverso=True
 							control_de_flujo=control_de_flujo*(-1)
 							
-						#Entra aquí si el jugador quiere jugar un CAMBIA COLOR o un TOMA CUATRO
+						
+						#Entra aquí si la computadora juega un CAMBIA COLOR o un TOMA CUATRO. La computadora elige el siguiente color de manera aleatoria
 						if isinstance(lista_de_jugadores[jugador_actual][carta_jugada], cambia_color) or isinstance(lista_de_jugadores[jugador_actual][carta_jugada], masCuatro):
 							color_elegido=random.randint(1,4)
 							if color_elegido==1:
@@ -532,10 +565,13 @@ def partida():
 							elif color_elegido==4:
 								lista_de_jugadores[jugador_actual][carta_jugada].asignar_color("AMARILLO")
 							
+							
 							# Luego de elegir el color, si la carta es un TOMA CUATRO, entra aquí
 							if isinstance(lista_de_jugadores[jugador_actual][carta_jugada], masCuatro):
 								toma_cuatro=True
 								cascada_toma_cuatro=cascada_toma_cuatro+4
+						
+						
 						#Finalmente, juega la carta
 						lista_de_jugadores[jugador_actual], pila_descarte=ponerCarta(lista_de_jugadores[jugador_actual],pila_descarte,carta_jugada)
 						historial_de_jugadores.append(" Jugador " +str(jugador_actual+1))
@@ -545,17 +581,21 @@ def partida():
 						break;
 
 			else:
+				#Entra en este condicional si el jugador perdió el turno
 				l(2);esp(6); print("Pierdes el Turno!")
 				pierde_turno=False
 				standby()
 				break;
 
+		
 		#FIN DE CICLO DEL TURNO
 		#INICIO DE LOS PREPARATIVOS PARA EL SIGUIENTE TURNO
 
+		
 		# El flujo entra en el condicional si el jugador elije finalizar la partida súbitamente
 		if salir:
 			break;
+		
 		
 		# El flujo entra en el condicional si el jugador actual tiene CERO cartas, declarandolo ganador y finalizando la partida
 		if len(lista_de_jugadores[jugador_actual])==0:
@@ -568,23 +608,29 @@ def partida():
 				l(2);esp(6);print("El jugador ",jugador_actual+1," ganó la partida!")
 				break;
 		
+		
 		# El flujo entra en el condicional si ocurrió algún error durante el turno, y se requiere inicial el turno nuevamente con el mismo jugador
 		if error:
 			error=False
 			continue;
 
+		
 		#El flujo entra en el condicional si sólo hay 2 jugadores y alguno de ellos pone una carta reverso. Según las reglas de UNO, el que puso la carta reverso puede jugar de nuevo
 		if carta_reverso and numero_de_jugadores==2:
 			carta_reverso=False
 			clear();continue;
 
+		
 		#Las siguientes instrucciones son para asignar un nuevo valor a la variable JUGADOR ACTUAL, para que en la siguiente iteración del ciclo, le toque al siguiente jugador en la lista
 		jugador_actual=jugador_actual+control_de_flujo
+		
+		
 		#Los condicionales siguiente funcionan para que la variable JUGADOR ACTUAL no adquiera un valor que se encuentre fuera del rango de la lista de jugadores
 		if jugador_actual==numero_de_jugadores:
 			jugador_actual=0
 		if jugador_actual==-1:
 			jugador_actual=numero_de_jugadores-1
+
 
 		#Las siguientes instrucciones determinan si el proximo jugador va a ser una computadora o un humano
 		if jugador_actual==0:
@@ -611,6 +657,8 @@ def partida():
 			else:
 				jugador_actual_es_humano=False
 
+
+	#BORRAR VARIABLES Y LISTAS 
 	del mazo
 	del pila_descarte
 	del baraja1
@@ -621,6 +669,8 @@ def partida():
 	if juegan_cuatro:
 		del baraja4
 	del lista_de_jugadores
+
+
 	l(1);esp(6);print("Partida Finalizada. Gracias por jugar!")
 	standby()
 	clear()
