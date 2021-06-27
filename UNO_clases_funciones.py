@@ -1,4 +1,5 @@
 # Librerías
+import keyboard
 import os
 from colorama import *
 init(autoreset=True) # VER https://pypi.org/project/colorama/
@@ -23,6 +24,10 @@ def standby(): a=input()
 
 
 def esp(n):
+	if n <= 0:
+		n = 0
+	if type(n) == float:
+		n = round(n)
 	for i in range(n):
 		print(" ", end="")
 
