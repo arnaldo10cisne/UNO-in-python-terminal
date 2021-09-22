@@ -576,7 +576,7 @@ def partida():
 						lista_de_jugadores[jugador_actual], pila_descarte=ponerCarta(lista_de_jugadores[jugador_actual],pila_descarte,carta_jugada)
 						historial_de_jugadores.append(" Jugador " +str(jugador_actual+1))
 						lista_de_cartas_validas = []
-						l(1);esp(6);print("Carta jugada por la computdora: ", end="");pila_descarte[-1].mostrar_cara()
+						l(1);esp(6);print("Carta jugada por la computadora: ", end="");pila_descarte[-1].mostrar_cara()
 						standby()
 						break;
 
