@@ -5,6 +5,22 @@ try:
 	import keyboard
 	from colorama import *
 except:
+	if os.name=="nt":
+		os.system("cls");
+	else:
+		os.system("clear");
+	print('')
+	print('')
+	print('    	 / / / / | / / __ \/ /')
+	print('     / / / /  |/ / / / / /') 
+	print('    / /_/ / /|  / /_/ /_/')  
+	print('    \____/_/ |_/\____(_)')
+	print('')
+	print('    INSTALANDO DEPENDENCIAS:')
+	print('        keyboard v0.13.5')
+	print('        colorama v0.4.3')
+	print('')
+	print('    Por favor espere, el juego se iniciará pronto...') 
 	os.system("pip install -r requirements.txt")
 	import keyboard
 	from colorama import *
