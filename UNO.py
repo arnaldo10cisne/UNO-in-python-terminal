@@ -8,7 +8,7 @@ from partida import *
 
 
 def run():
-	os.system("pip install keyboard")
+	os.system("pip install -r requirements.txt")
 	keyboard.press_and_release('F11')
 	while True:
 		clear()
