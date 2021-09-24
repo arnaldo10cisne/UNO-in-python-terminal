@@ -8,7 +8,6 @@ from partida import *
 
 
 def run():
-	os.system("pip install -r requirements.txt")
 	if os.name=="nt":
 		keyboard.press_and_release('F11')
 	while True:

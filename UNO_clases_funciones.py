@@ -1,9 +1,14 @@
 # Librerías
-import keyboard
 import os
-from colorama import *
-init(autoreset=True) # VER https://pypi.org/project/colorama/
 import random #DOCU: https://www.youtube.com/watch?v=PoUcplbntYo&ab_channel=LeonardoKuffo
+try:
+	import keyboard
+	from colorama import *
+except:
+	os.system("pip install -r requirements.txt")
+	import keyboard
+	from colorama import *
+init(autoreset=True) # VER https://pypi.org/project/colorama/
 
 
 # Métodos Estéticos y de Espera de respuesta
