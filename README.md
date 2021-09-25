@@ -5,7 +5,7 @@ Este código, escrito en Python, simula una partida de cartas de UNO!, donde pue
 
 Como parte de mi portafolio de proyectos personales, este es uno que durante mucho tiempo tuve planeado hacer, incluso desde mis días en la universidad. Finalmente tomé la iniciativa de construirlo cuando empecé a aprender Python.
 
-El juego está optimizado para correr desde la terminal de Windows o la terminal de Linux, y activará la pantalla completa al empezar.
+El juego está optimizado para correr desde la terminal de Windows o la terminal de Linux, y activará la pantalla completa al empezar (función exclusiva de Windows).
 
 ## Flujo normal de una partida
 
