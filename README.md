@@ -53,7 +53,11 @@ Al extraer los datos, encontrarás 3 archivos. Para iniciar el juego, simplement
 
 ![enter image description here](https://res.cloudinary.com/arnaldo10cisne/image/upload/v1631803384/Uno-python-captures/unogithub13_skyrpr.png)
 
-Espero que lo disfruten!
+Si es la primera vez que inicias el juego, el programa instalará 2 paquetes de Python que son necesarios para correr el código correctamente. Estos paquetes son:
+- [keyboard](https://pypi.org/project/keyboard/)
+- [colorama](https://pypi.org/project/colorama/)
+
+Una vez instalados, el juego iniciará automáticamente. Espero que lo disfruten!
 
 ![enter image description here](https://res.cloudinary.com/arnaldo10cisne/image/upload/v1623701627/Uno-python-captures/uno-python-cover_hn4o6b.png)
 
